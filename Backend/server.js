@@ -110,7 +110,28 @@ app.get('/questions', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+// ✅ CHATBOT - Add this route to your server.js
+app.post('/ask', async (req, res) => {
+  try {
+    const { question } = req.body;
+    if (!question) return res.status(400).json({ error: "No question provided" });
 
+    // Search faqs table for closest matching answer
+    const result = await pool.query(
+      "SELECT answer FROM faqs WHERE question ILIKE $1 LIMIT 1",
+      [`%${question}%`]
+    );
+
+    if (result.rows.length > 0) {
+      res.json({ answer: result.rows[0].answer });
+    } else {
+      res.json({ answer: "Sorry, I don't have an answer for that yet. 🤖" });
+    }
+  } catch (err) {
+    console.error("ASK ERROR:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
 // ✅ PORT
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
