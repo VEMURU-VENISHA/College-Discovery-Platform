@@ -5,14 +5,14 @@ import API from "../api";
 function CollegeDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [college, setCollege] = useState(null);   // ✅ null, not array
+  const [college, setCollege] = useState(null);  
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     fetch(`${API}/college/${id}`)
       .then(res => res.json())
       .then(data => {
-        setCollege(data.college);       // ✅ NOT wrapped in []
+        setCollege(data.college);       
         setCourses(data.courses || []);
       })
       .catch(err => console.error(err));
@@ -60,7 +60,7 @@ function CollegeDetail() {
           <p className="text-red-500">No courses available ❌</p>
         ) : (
           <ul className="list-disc ml-6">
-            {courses.map((c, i) => (      // ✅ clean .map(), no broken links
+            {courses.map((c, i) => (      
               <li key={i}>{c.course_name}</li>
             ))}
           </ul>
