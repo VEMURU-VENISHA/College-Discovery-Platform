@@ -1,5 +1,5 @@
 import { useState } from "react";
-import API from "../api";  // ✅ uses your real backend URL
+import API from "../api";  
 
 function ChatBot() {
   const [open, setOpen] = useState(false);
@@ -11,7 +11,7 @@ function ChatBot() {
     const userMsg = { type: "user", text: input };
 
     try {
-      const res = await fetch(`${API}/ask`, {   // ✅ FIXED: no more localhost
+      const res = await fetch(`${API}/ask`, {   
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: input }),
@@ -32,8 +32,6 @@ function ChatBot() {
       ]);
     }
   };
-
-  // ✅ Allow sending with Enter key
   const handleKeyDown = (e) => {
     if (e.key === "Enter") sendMessage();
   };
@@ -69,7 +67,7 @@ function ChatBot() {
                 Ask anything about colleges...
               </p>
             )}
-            {messages.map((m, i) => (   // ✅ FIXED: clean .map()
+            {messages.map((m, i) => (   
               <div
                 key={i}
                 className={`mb-2 ${m.type === "user" ? "text-right" : "text-left"}`}
@@ -91,7 +89,7 @@ function ChatBot() {
           <div className="p-2 border-t">
             <input
               value={input}
-              onChange={(e) => setInput(e.target.value)}  // ✅ FIXED: clean e.target.value
+              onChange={(e) => setInput(e.target.value)}  
               onKeyDown={handleKeyDown}
               placeholder="Ask a question..."
               className="border p-2 w-full rounded mb-2"
