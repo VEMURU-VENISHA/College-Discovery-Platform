@@ -1,27 +1,18 @@
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
-
 const app = express();
-
-// ✅ CORS - only once, before routes
 app.use(cors({
   origin: ['https://college-discovery-platform-nine.vercel.app', 'http://localhost:3000']
 }));
 app.use(express.json());
-
-// ✅ DB Connection
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
 });
-
-// ✅ TEST ROUTE
 app.get('/', (req, res) => {
   res.send("Backend is running 🚀");
 });
-
-// ✅ GET ALL COLLEGES
 app.get('/colleges', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM colleges');
@@ -31,8 +22,6 @@ app.get('/colleges', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// ✅ SEARCH
 app.get('/search', async (req, res) => {
   try {
     const { name } = req.query;
@@ -46,8 +35,6 @@ app.get('/search', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// ✅ FILTER
 app.get('/filter', async (req, res) => {
   try {
     const { location = "", maxFees = 1000000 } = req.query;
@@ -61,8 +48,6 @@ app.get('/filter', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// ✅ COLLEGE DETAIL (was MISSING!)
 app.get('/college/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -84,8 +69,6 @@ app.get('/college/:id', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// ✅ COMPARE (was MISSING!)
 app.post('/compare', async (req, res) => {
   try {
     const { ids } = req.body;
@@ -99,8 +82,6 @@ app.post('/compare', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// ✅ QUESTIONS (was MISSING!)
 app.get('/questions', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM faqs');
@@ -110,8 +91,6 @@ app.get('/questions', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-// ✅ CHATBOT - Add this route to your server.js
-// ✅ CHATBOT ASK ROUTE
 app.post('/ask', async (req, res) => {
   try {
     const { question } = req.body;
@@ -132,7 +111,6 @@ app.post('/ask', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-// ✅ PORT
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
