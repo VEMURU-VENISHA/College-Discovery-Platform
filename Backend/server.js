@@ -5,7 +5,10 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+app.use(cors({
+  origin: ['https://college-discovery-platform-nine.vercel.app',
+            'http://localhost:3000']
+}));
 // ✅ Connect to Render DB
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
