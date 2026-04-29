@@ -111,12 +111,12 @@ app.get('/questions', async (req, res) => {
   }
 });
 // ✅ CHATBOT - Add this route to your server.js
+// ✅ CHATBOT ASK ROUTE
 app.post('/ask', async (req, res) => {
   try {
     const { question } = req.body;
     if (!question) return res.status(400).json({ error: "No question provided" });
 
-    // Search faqs table for closest matching answer
     const result = await pool.query(
       "SELECT answer FROM faqs WHERE question ILIKE $1 LIMIT 1",
       [`%${question}%`]
