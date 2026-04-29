@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// ✅ ADD THIS
 import API from "../api";
 function Home() {
   const [colleges, setColleges] = useState([]);
