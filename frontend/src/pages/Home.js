@@ -11,7 +11,7 @@ function Home() {
   const navigate = useNavigate();
 
   // ✅ YOUR LIVE BACKEND URL
-  const API = "https://college-backend-q6hz.onrender.com";
+  const API = "https://college-backend-h9y7.onrender.com";
 
   // 🔄 Load all colleges
   useEffect(() => {
