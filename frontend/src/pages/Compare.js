@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import API from "../api";   // ✅ ADD THIS
+import API from "../api";  
 
 function Compare() {
   const location = useLocation();
@@ -10,7 +10,7 @@ function Compare() {
   useEffect(() => {
     if (!location.state?.ids) return;
 
-    fetch(`${API}/compare`, {   // ✅ FIXED
+    fetch(`${API}/compare`, {  
       method: "POST",
       headers: {
         "Content-Type": "application/json",
