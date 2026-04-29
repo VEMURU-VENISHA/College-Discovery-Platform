@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+// ✅ ADD THIS
+import API from "../api";
 function Home() {
   const [colleges, setColleges] = useState([]);
   const [search, setSearch] = useState("");
@@ -10,8 +11,7 @@ function Home() {
 
   const navigate = useNavigate();
 
-  // ✅ YOUR LIVE BACKEND URL
-  const API = "https://college-backend-h9y7.onrender.com";
+
 
   // 🔄 Load all colleges
   useEffect(() => {
