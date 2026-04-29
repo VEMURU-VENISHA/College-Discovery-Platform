@@ -10,10 +10,6 @@ function Home() {
   const [maxFees, setMaxFees] = useState(1000000);
 
   const navigate = useNavigate();
-
-
-
-  // 🔄 Load all colleges
   useEffect(() => {
     fetch(`${API}/colleges`)
       .then(res => res.json())
@@ -21,7 +17,6 @@ function Home() {
       .catch(err => console.error(err));
   }, []);
 
-  // 🔍 Search
   const handleSearch = () => {
     fetch(`${API}/search?name=${search}`)
       .then(res => res.json())
@@ -29,7 +24,6 @@ function Home() {
       .catch(err => console.error(err));
   };
 
-  // 🎯 Filter
   const handleFilter = () => {
     fetch(`${API}/filter?location=${location}&maxFees=${maxFees}`)
       .then(res => res.json())
