@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API from "../api";   // ✅ ADD THIS
+import API from "../api";   
 
 function Questions() {
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${API}/questions`)   // ✅ FIXED
+    fetch(`${API}/questions`)   
       .then(res => res.json())
       .then(data => setQuestions(data))
       .catch(err => console.error(err));
